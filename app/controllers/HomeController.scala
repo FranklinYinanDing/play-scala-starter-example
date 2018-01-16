@@ -1,5 +1,6 @@
 package controllers
 
+import filters.ExampleFilter
 import javax.inject._
 import play.api.mvc._
 
@@ -16,8 +17,9 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
    * will be called when the application receives a `GET` request with
    * a path of `/`.
    */
-  def index = Action {
-    Ok(views.html.index("Your new application is ready."))
+  def index = Action { request =>
+    val cache = request.attrs(ExampleFilter.Cache)
+    Ok(cache.get("foo").get)
   }
 
 }
