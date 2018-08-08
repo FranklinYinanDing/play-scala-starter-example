@@ -41,3 +41,7 @@ repositories {
         layout "ivy"
     }
 }
+
+tasks.withType(PlayRun) {
+    forkOptions.jvmArgs = ['-Dhttps.port=9443']
+}
